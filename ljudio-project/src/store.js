@@ -8,7 +8,12 @@ const store = createStore({
        
    },
    actions:{
-        
+       async fetchList({commit}){
+           let result = await fetch('https://yt-music-api.herokuapp.com')
+           let data = await result.json()
+            commit('loadList', data.title)
+            console.log(data.title)
+        }
    }
 })
 
