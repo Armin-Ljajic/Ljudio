@@ -4,9 +4,10 @@
       <div class="form2">
           <input type="text" placeholder="Search.." v-model="keyword">
           <button @click.prevent="checkName">Search</button>
+          <p>Search songs and artists</p>
       </div>
         <ul>
-            <li v-for="song in songs" :key="song.name">
+            <li v-for="(song, index) in songs" :key="index">
                 <div> 
                   <p><span><i class="fas fa-record-vinyl"></i>Album:</span> {{song.album.name}}</p> <br/>
                   <p><span><i class="fas fa-user"></i>Artist:</span> {{song.artist.name}}</p>  <br/>
@@ -106,15 +107,16 @@ export default {
 
 }
 
+.form2{
+  text-align: center;
+}
+
 li{
   list-style: none;
   border: 1px solid black;
-  
+  padding:2vw;
 }
 
-li.menu-item:not(:last-child){ 
-   margin-bottom: 0 0 10px 0;  
-}
 
 ul{
   padding:0;
@@ -125,6 +127,7 @@ input{
   margin: 0 auto;
   width: 60%;
   text-align: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 button{
@@ -135,6 +138,7 @@ button{
   color:white;
   border: 1px solid black;
   border-radius: 5px ;
+  font-family: 'Courier New', Courier, monospace;
   
 }
 button:hover{
@@ -143,9 +147,16 @@ button:hover{
 
 div>span{
   font-weight: bold;
+  
+}
+
+div>p{
+  font-family: 'Courier New', Courier, monospace;
 }
 div>p>span{
   font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 120%;
 }
 
 .buttons{

@@ -2,9 +2,9 @@
     <section class="nav">
         <nav>
             <h1>LJUDIO</h1>
-             <router-link to="/">Home</router-link>
-             <router-link to="/playlist">Playlist</router-link>
-             <router-link to="/more">More</router-link>
+             <router-link to="/">Home</router-link> |
+             <router-link to="/albums">Albums</router-link> |
+             <router-link to="/artists">Artists</router-link>
         </nav>
     </section>
 </template>
@@ -32,11 +32,13 @@ a{
     text-decoration: none;
     font-size:130%;
     padding:2vw;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 h1{
     color:White;
-    font-size:150%;
+    font-size:250%;
+    font-family: 'Courier New', Courier, monospace;
     
 }
 
