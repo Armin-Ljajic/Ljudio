@@ -10,19 +10,24 @@
 </template>
 <script>
 export default {
+    mounted(){
+        
+    },
     
 }
 </script>
 
 <style scoped>
-.nav{
+nav{
     background-color: rgba(108, 109, 114, 0.9);
     border:1px solid black;
     height: 10vh;
+    width:100%;
     text-align: center;
+    
 }
 a{
-    color:White;
+    color:white;
     text-decoration: none;
     font-size:130%;
     padding:2vw;
@@ -31,5 +36,8 @@ a{
 h1{
     color:White;
     font-size:150%;
+    
 }
+
+
 </style>

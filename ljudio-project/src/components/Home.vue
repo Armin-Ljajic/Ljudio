@@ -1,28 +1,37 @@
 <template>
     <div>
         <Header/>
-        <h1>Hello</h1>
-        <h2>Hello</h2>
-        <!-- <Footer/> -->
-        <button @click="loadList">Click me</button>
+        <Player/>
+        
     </div>
 </template>
 <script>
+
 import Footer from './Footer.vue'
 import Header from './Header.vue'
+import Player from './Player.vue'
+import axios from 'axios';
 
 export default {
     components: {
         Header,
         Footer,
+        Player,
+        axios
+        
     },
+    
     methods:{
-        loadList(){
-            this.$store.dispatch('fetchList');
-        }
-    }
-}
+        async fetchList(){
+           let result = await fetch('https://yt-music-api.herokuapp.com/api/yt/songs/search+string')
+           let data = await result.json();
+            console.log(data)
 
+        },
+        
+    }
+    
+}
 
 </script>
 
