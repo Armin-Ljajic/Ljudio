@@ -2,7 +2,12 @@
     <body>
         <div class="container">
             <div class="footer">
-
+                <div class="icons">
+                    <i class="fab fa-twitter-square"></i>
+                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-youtube-square"></i>
+                    <i class="fab fa-instagram-square"></i>
+                </div>
             </div>
         </div>
     </body>
@@ -15,18 +20,22 @@ export default {
 </script>
 
 <style scoped>
-body{
-    position:relative;
-    min-height: 90vh; /* will cover the 100% of viewport */
-    overflow: hidden;
-    display: block;
-    position: relative;
-    }
+.container{
+        margin: 0 0 100px;
+}
 .footer{
     background-color: rgba(108, 109, 114, 0.9);
-    position: absolute;
     bottom: 0;
+    left:0;
     width: 100%;
-    height:10vh;
+    min-height:100px;
+    position:fixed;
+}
+.icons>i{
+    font-size: 350%;
+    margin-right: 2vw;
+    position: relative;
+    left:3vw;
+    top:1vw;
 }
 </style>

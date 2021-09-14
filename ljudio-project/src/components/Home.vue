@@ -2,7 +2,7 @@
     <div>
         <Header/>
         <Player/>
-        
+        <Footer/>
     </div>
 </template>
 <script>
@@ -22,12 +22,6 @@ export default {
     },
     
     methods:{
-        async fetchList(){
-           let result = await fetch('https://yt-music-api.herokuapp.com/api/yt/songs/search+string')
-           let data = await result.json();
-            console.log(data)
-
-        },
         
     }
     
