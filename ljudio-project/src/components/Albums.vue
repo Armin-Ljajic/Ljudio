@@ -5,11 +5,11 @@
             <section>
                 <input type="text" placeholder="Search albums.." v-model="keyword">
                 <button @click.prevent="checkName">Search</button>
-                <p class="searchParam">Search albums to see both singles and albums of specified artist</p>
+                <p class="searchParam">Search artists to see their albums and singles</p>
                 <ul>
                     <li v-for="album in albums" :key="album.name">
-                        <p>{{album.name}}</p>
-                        <p><i class="fas fa-record-vinyl"></i>{{album.type}}</p>
+                        <p><i class="fas fa-record-vinyl"></i>{{album.name}}</p>
+                        <p><img :src="album.thumbnails[1].url"> {{album.type}}</p>
                     </li>
                 </ul>
             </section>
@@ -109,7 +109,7 @@ button:hover{
   background-color: rgb(70, 76, 77);
 }
 i{
-    font-size: 200%;
+    font-size: 100%;
 }
 p{
     font-family: 'Courier New', Courier, monospace;

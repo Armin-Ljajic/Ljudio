@@ -9,14 +9,16 @@
         <ul>
             <li v-for="(song, index) in songs" :key="index">
                 <div> 
-                  <p><span><i class="fas fa-record-vinyl"></i>Album:</span> {{song.album.name}}</p> <br/>
-                  <p><span><i class="fas fa-user"></i>Artist:</span> {{song.artist.name}}</p>  <br/>
+                  <p><span><i class="fas fa-record-vinyl"></i>Album:</span> {{song.album.name}}</p> 
+                  <p><span><i class="fas fa-user"></i>Artist:</span> {{song.artist.name}}</p> 
+                  <img :src="song.thumbnails[1].url"> 
                   <p><span><i class="fab fa-itunes-note"></i>Song:</span> {{song.name}}</p>
-                  <p><span><i class="fas fa-link"></i>Link:</span> https://www.youtube.com/watch?v={{song.videoId}}</p> 
+                  <p><span><i class="fas fa-link"></i>Link:</span> <a href=""></a> https://www.youtube.com/watch?v={{song.videoId}}</p> 
                 </div>
                 <div class="buttons">
                   <button @click="play(song.videoId)"><i class="fas fa-play"></i></button>
                   <button @click="pause"><i class="fas fa-pause"></i></button>
+                  <button @click="next">Next</button>
                 </div>
             </li>
         </ul>
@@ -28,6 +30,7 @@
 import axios from 'axios';
 import jquery from 'jquery';
 window.$ = jquery;
+import {debounce} from 'lodash';
 
 export default {
   components:{
@@ -53,6 +56,7 @@ export default {
     next(){
       //window.player.loadPlaylist(playlist)
       window.player.nextVideo();
+      window.player.playVideo();
       
     },
     
@@ -66,10 +70,10 @@ export default {
             .then(res => {
               console.log(res.data.content)
               this.songs = res.data.content;
-              for(const val of this.songs){
-                this.playlist = val.videoId;
-                console.log(this.playlist);
-              }
+              // for(const val of this.songs){
+              //   this.playlist = val.videoId;
+              //   console.log(this.playlist);
+              // }
                 // this.songs.filter(item => {
                 //   return this.keyword
                 //   .toLowerCase()
@@ -88,6 +92,18 @@ export default {
            .then(res => {
              console.log(res.data)
            })
+  },
+
+  watch:{
+    keyword(){
+      if (!this.keyword) return;
+      this.debounceName();
+    }
+
+    
+  },
+  created(){
+    this.debounceName = debounce(this.checkName, 1000)
   }
 }
 </script>
@@ -162,7 +178,25 @@ div>p>span{
 .buttons{
   display:flex;
   flex-direction: column;
-  margin-bottom: 1vw;;
+  margin-bottom: 1vw;
 }
 
+
+img{
+  float:right;
+  display:block;
+  position: relative;
+  top: -4vw;
+}
+
+@media screen and (max-width:500px) and (min-width: 400px){
+  .form{
+    min-width: 100%;
+  }
+
+  button{
+    border-radius: 50%;
+    margin-bottom: 2vw;
+  }
+}
 </style>
