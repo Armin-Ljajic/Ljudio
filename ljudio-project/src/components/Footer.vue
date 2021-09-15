@@ -44,6 +44,7 @@ export default {
     position: relative;
     left:3vw;
     top:1vw;
+    
 }
 
 .footerNav{
@@ -69,6 +70,7 @@ a{
       text-align:center;
       position:relative;
       right:2vw;
+      
   }
   
 }
