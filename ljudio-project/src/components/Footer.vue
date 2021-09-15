@@ -8,6 +8,13 @@
                     <i class="fab fa-youtube-square"></i>
                     <i class="fab fa-instagram-square"></i>
                 </div>
+                <div class="footerNav">
+                    <nav>
+                        <a href="#">Contact us</a> |
+                        <a href="#">About us</a> |
+                        <a href="#">FAQ</a>
+                    </nav>
+                </div>
             </div>
         </div>
     </body>
@@ -37,5 +44,32 @@ export default {
     position: relative;
     left:3vw;
     top:1vw;
+}
+
+.footerNav{
+    text-align: center;
+}
+a{
+    padding: 2vw;
+    color:white;
+    text-decoration: none;
+}
+
+@media screen and (max-width:500px) and (min-width: 400px){
+  .icons{
+      text-align: center;
+      position:relative;
+      right:1vw;   
+  }
+  
+}
+
+@media screen and (max-width: 1000px) and (min-width: 700px) {
+  .icons{
+      text-align:center;
+      position:relative;
+      right:2vw;
+  }
+  
 }
 </style>

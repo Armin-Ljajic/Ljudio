@@ -3,7 +3,7 @@
     <div class="form">
       <div class="form2">
           <input type="text" placeholder="Search.." v-model="keyword">
-          <button @click.prevent="checkName">Search</button>
+          <button @click.prevent="checkName"><i class="fas fa-search"></i></button>
           <p>Search songs and artists</p>
       </div>
         <ul>
@@ -13,7 +13,7 @@
                   <p><span><i class="fas fa-user"></i>Artist:</span> {{song.artist.name}}</p> 
                   <img :src="song.thumbnails[1].url"> 
                   <p><span><i class="fab fa-itunes-note"></i>Song:</span> {{song.name}}</p>
-                  <p><span><i class="fas fa-link"></i>Link:</span> <a href=""></a> https://www.youtube.com/watch?v={{song.videoId}}</p> 
+                  <p><span><i class="fas fa-link"></i>Link:</span>  https://www.youtube.com/watch?v={{song.videoId}}</p> 
                 </div>
                 <div class="buttons">
                   <button @click="play(song.videoId)"><i class="fas fa-play"></i></button>
@@ -49,6 +49,8 @@ export default {
       // calling global variable
       window.player.loadVideoById(id)
       window.player.playVideo()
+      let total = window.player.getCurrentTime();
+      console.log(total);
     },
     pause(){
       window.player.pauseVideo()
@@ -56,7 +58,7 @@ export default {
     next(){
       //window.player.loadPlaylist(playlist)
       window.player.nextVideo();
-      window.player.playVideo();
+     
       
     },
     
@@ -103,7 +105,7 @@ export default {
     
   },
   created(){
-    this.debounceName = debounce(this.checkName, 1000)
+    this.debounceName = debounce(this.checkName, 500)
   }
 }
 </script>
@@ -121,6 +123,7 @@ export default {
   padding-right: 40px;
   padding-left: 40px;
   border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
 
@@ -133,6 +136,8 @@ li{
   border: 1px solid black;
   padding:2vw;
   margin-bottom: 2vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
 }
 
 

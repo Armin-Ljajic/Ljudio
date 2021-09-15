@@ -4,11 +4,12 @@
         <div class="artists">
             <section>
                 <input type="text" placeholder="Search artists.." v-model="keyword">
-                <button @click.prevent="checkName">Search</button>
+                <button @click.prevent="checkName"><i class="fas fa-search"></i></button>
                 <p class="searchParam">Search artists to see the artist name and whom the artist features</p>
                 <ul>
                     <li v-for="artist in artists" :key="artist.name">
                         <p><i class="fas fa-user"></i>{{artist.name}}</p>
+                        <img :src="artist.thumbnails[1].url">
                     </li>
                 </ul>
             </section>
@@ -69,6 +70,7 @@ export default {
     padding-right: 40px;
     padding-left: 40px;
     border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
 
 }
@@ -82,6 +84,8 @@ li{
     border:1px solid black;
     padding:2vw;
     margin-bottom: 2vw;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
 }
 ul{
     padding:0;
@@ -116,6 +120,9 @@ p{
     font-family: 'Courier New', Courier, monospace;
 }
 
+img{
+    
+}
 @media screen and (max-width:500px) and (min-width: 400px){
   .artists{
     min-width: 100%;
