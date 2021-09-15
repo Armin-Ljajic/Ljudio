@@ -69,6 +69,7 @@ export default {
     padding-top: 2vw;
     padding-right: 40px;
     padding-left: 40px;
+    border-radius: 10px;
 }
 
 section{
@@ -79,6 +80,7 @@ li{
     list-style: none;
     border:1px solid black;
     padding:2vw;
+    margin-bottom: 2vw;
 }
 ul{
     padding:0;
@@ -117,5 +119,19 @@ p{
 }
 .searchParam{
     font-size: 100%;
+}
+
+@media screen and (max-width:500px) and (min-width: 400px){
+  .albums{
+    min-width: 100%;
+  }
+  
+}
+
+@media screen and (max-width: 1000px) and (min-width: 700px) {
+  .albums{
+    min-width: 100%;
+  }
+  
 }
 </style>

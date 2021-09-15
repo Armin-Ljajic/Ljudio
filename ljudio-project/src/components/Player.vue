@@ -120,6 +120,7 @@ export default {
   padding-top: 2vw;
   padding-right: 40px;
   padding-left: 40px;
+  border-radius: 10px;
 
 }
 
@@ -131,6 +132,7 @@ li{
   list-style: none;
   border: 1px solid black;
   padding:2vw;
+  margin-bottom: 2vw;
 }
 
 
@@ -179,6 +181,7 @@ div>p>span{
   display:flex;
   flex-direction: column;
   margin-bottom: 1vw;
+  margin-left: 6vw;
 }
 
 
@@ -197,6 +200,16 @@ img{
   button{
     border-radius: 50%;
     margin-bottom: 2vw;
+  }
+}
+
+@media screen and (max-width: 1000px) and (min-width: 700px) {
+  .form{
+    min-width: 100%;
+  }
+
+  .buttons{
+    margin-left: 10vw;
   }
 }
 </style>
