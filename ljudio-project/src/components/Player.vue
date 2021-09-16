@@ -1,11 +1,17 @@
 <template>
   <div>
-    <div class="form">
       <div class="form2">
-          <input type="text" placeholder="Search.." v-model="keyword">
-          <button @click.prevent="checkName"><i class="fas fa-search"></i></button>
-          <p>Search songs and artists</p>
-      </div>
+            <input type="text" placeholder="Search.." v-model="keyword">
+            <button @click.prevent="checkName"><i class="fas fa-search"></i></button>
+              <div class="buttons2">
+                <button @click="previous"><i class="fas fa-backward"></i></button>
+                <button @click="pause"><i class="fas fa-pause"></i></button>
+                <button @click="next"><i class="fas fa-forward"></i></button>
+              </div>
+            <p>Search songs and artists</p>
+        </div>
+    <div class="form">
+        <h1 class="searchResults">Search results</h1>
         <ul>
             <li v-for="(song, index) in songs" :key="index">
                 <div> 
@@ -14,15 +20,17 @@
                   <img :src="song.thumbnails[1].url"> 
                   <p><span><i class="fab fa-itunes-note"></i>Song:</span> {{song.name}}</p>
                   <p><span><i class="fas fa-link"></i>Link:</span>  https://www.youtube.com/watch?v={{song.videoId}}</p> 
+                  <router-link :to="song.videoId">Link</router-link>
                 </div>
                 <div class="buttons">
-                  <button @click="play(song.videoId)"><i class="fas fa-play"></i></button>
-                  <button @click="pause"><i class="fas fa-pause"></i></button>
-                  <button @click="next">Next</button>
+                  <button @click="play(song.videoId, index)"><i class="fas fa-play"></i></button>
                 </div>
             </li>
         </ul>
+        
     </div>
+
+    
   </div>
 </template>
 
@@ -41,25 +49,41 @@ export default {
             keyword: "",
             songs: [],
             playlist: [],
+            currentPlaylistIndex: 0,
+            showPlaces: false,
+            selectedPlace: {}
         }
     },
+    computed:{
+      showProduct(){
+        const id = this.$route.params.id;
+        const song = this.songs.find((s) => s.videoId == id);
+        return song;
+      }
+    },
+
+    methods:{
     
-  methods:{
-    play(id){
+    play(id, index){
       // calling global variable
       window.player.loadVideoById(id)
+      this.currentPlaylistIndex = index
       window.player.playVideo()
-      let total = window.player.getCurrentTime();
-      console.log(total);
     },
     pause(){
       window.player.pauseVideo()
     },
     next(){
-      //window.player.loadPlaylist(playlist)
-      window.player.nextVideo();
-     
-      
+      this.play(this.playlist[this.currentPlaylistIndex+1], this.currentPlaylistIndex +1)
+      // if (this.playlist[19]) {
+      //    this.play(this.playlist[this.currentPlaylistIndex[0]], this.playlist[this.currentPlaylistIndex[0]])
+      // }
+    },
+    previous(){
+      this.play(this.playlist[this.currentPlaylistIndex -1 ], this.currentPlaylistIndex -1)
+      // if (this.currentPlaylistIndex[0]) {
+      //   this.play(this.playlist[this.currentPlaylistIndex[19]])
+      // }
     },
     
     checkName(){
@@ -72,10 +96,11 @@ export default {
             .then(res => {
               console.log(res.data.content)
               this.songs = res.data.content;
-              // for(const val of this.songs){
-              //   this.playlist = val.videoId;
-              //   console.log(this.playlist);
-              // }
+              this.playlist.length = 0;
+              for(const val of this.songs){
+                this.playlist.push(val.videoId);
+                console.log(this.playlist);
+                }
                 // this.songs.filter(item => {
                 //   return this.keyword
                 //   .toLowerCase()
@@ -89,11 +114,11 @@ export default {
         }
   },
   mounted(){
-           axios
-           .get(`https://yt-music-api.herokuapp.com/api/yt/artists/search+string`)
-           .then(res => {
-             console.log(res.data)
-           })
+          //  axios
+          //  .get(`https://yt-music-api.herokuapp.com/api/yt/artists/search+string`)
+          //  .then(res => {
+          //    console.log(res.data)
+          //  })
   },
 
   watch:{
@@ -114,7 +139,7 @@ export default {
 
 .form{
   background-color: rgb(187, 166, 138, 0.5);
-  min-height:40vh;
+  /* min-height:40vh; */
   width:50%;
   margin: auto;
   margin-top: 15vh;
@@ -129,6 +154,18 @@ export default {
 
 .form2{
   text-align: center;
+  position:fixed;
+  margin-left: 2vw;
+  padding:2vw;
+  border-radius: 10px;
+  background-color: rgb(187, 166, 138, 0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.form2>input,
+.form2>button{
+  width:100%
 }
 
 li{
@@ -168,6 +205,12 @@ button:hover{
   background-color: rgb(70, 76, 77);
 }
 
+.buttons2{
+  display:flex;
+
+}
+.buttons2>button{
+}
 div>span{
   font-weight: bold;
   
@@ -197,6 +240,15 @@ img{
   top: -4vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.searchResults{
+    font-family: 'Courier New', Courier, monospace;
+    text-align:center;
+}
+
+
+
+
 
 @media screen and (max-width:500px) and (min-width: 400px){
   .form{

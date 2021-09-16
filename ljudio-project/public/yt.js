@@ -6,7 +6,7 @@ function onYouTubeIframeAPIReady() {
       width: '0',
       events: {
         'onStateChange': onPlayerStateChange
-      }
+      },
     });
   }
   
