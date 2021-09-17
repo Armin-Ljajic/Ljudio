@@ -2,23 +2,10 @@
     <body>
         <Header/>
         <div class="form">
-            <ul class="singleSongUL">
-                <li v-for="(singleSong, index) in singleSongs" :key="index">
-                    <p><i class="fas fa-user"></i> <span>Artist:</span> {{singleSong.artist.name}}</p>
-                    <p><i class="fab fa-itunes-note"></i> <span>Song: </span>{{singleSong.name}}</p>
-                    <img :src="singleSong.thumbnails[1].url"/>
-                    <div class="buttons">
-                        <button @click="play(singleSong.videoId, index)"><i class="fas fa-play"></i></button>
-                        <button @click="pause"><i class="fas fa-pause"></i></button>
-                    </div>
-                    <p> <span>Description: </span>{{text}}</p>
-                </li>
-
-            </ul>
             <ul class="singleArtistUL">
                 <li v-for="(singleArtist, index) in singleArtists" :key="index">
-                        <h2><i class="fas fa-user"></i> {{singleArtist.name}}</h2>
-                        <img :src="singleArtist.thumbnails[1].url">
+                    <h2><i class="fas fa-user"></i> {{singleArtist.name}}</h2>
+                    <img :src="singleArtist.thumbnails[1].url">
                 </li>
             </ul>
         </div>
@@ -96,7 +83,7 @@ export default {
 .form{
   background-color: rgb(187, 166, 138, 0.5);
   /* min-height:40vh; */
-  width:50%;
+  min-width:30%;
   margin: auto;
   margin-top: 15vh;
   padding-bottom: 2vw;
@@ -106,29 +93,6 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
-.singleSongUL{
-    padding:0;
-}
-
-.singleSongUL>li{
-    list-style: none;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    
-}
-
-.singleSongUL>li>p>span{
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 120%;
-}
-
-.singleSongUL>li>p{
-    font-family: 'Courier New', Courier, monospace;
-}
-
 
 .singleArtistUL{
     padding: 0;
