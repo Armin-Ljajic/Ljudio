@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '/src/components/Home.vue'
 import Albums from '/src/components/Albums.vue'
 import Artists from '/src/components/Artists.vue'
-import SingleSong from '/src/components/SingleSong.vue'
+import SingleResult from '/src/components/SingleResult.vue'
 
 
 const routes = [
@@ -25,9 +25,10 @@ const routes = [
     },
     {
         path: '/:id',
-        name: 'Song',
-        component: SingleSong
-    }
+        name: 'SingleResult',
+        component: SingleResult
+    },
+   
 ]
 const router = createRouter({
     history: createWebHistory(),

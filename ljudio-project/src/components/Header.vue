@@ -25,6 +25,7 @@ nav{
     width:100%;
     text-align: center;
     position:fixed;
+    z-index: 1;
     
 }
 a{

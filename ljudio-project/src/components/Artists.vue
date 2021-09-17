@@ -10,6 +10,7 @@
                     <li v-for="artist in artists" :key="artist.name">
                         <p><i class="fas fa-user"></i>{{artist.name}}</p>
                         <img :src="artist.thumbnails[1].url">
+                        <p><i class="fas fa-link"></i> <router-link :to="artist.browseId">Click to see artist</router-link></p>
                     </li>
                 </ul>
             </section>
@@ -118,6 +119,11 @@ button:hover{
 
 p{
     font-family: 'Courier New', Courier, monospace;
+}
+
+a{
+    color:black;
+    
 }
 
 img{

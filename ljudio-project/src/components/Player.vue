@@ -3,6 +3,7 @@
       <div class="form2">
             <input type="text" placeholder="Search.." v-model="keyword">
             <button @click.prevent="checkName"><i class="fas fa-search"></i></button>
+            
               <div class="buttons2">
                 <button @click="previous"><i class="fas fa-backward"></i></button>
                 <button @click="pause"><i class="fas fa-pause"></i></button>
@@ -12,6 +13,7 @@
         </div>
     <div class="form">
         <h1 class="searchResults">Search results</h1>
+         <button v-if="showContent" @click.prevent="showTopTen">Show top 10 results</button>
         <ul>
             <li v-for="(song, index) in songs" :key="index">
                 <div> 
@@ -19,8 +21,7 @@
                   <p><span><i class="fas fa-user"></i>Artist:</span> {{song.artist.name}}</p> 
                   <img :src="song.thumbnails[1].url"> 
                   <p><span><i class="fab fa-itunes-note"></i>Song:</span> {{song.name}}</p>
-                  <p><span><i class="fas fa-link"></i>Link:</span>  https://www.youtube.com/watch?v={{song.videoId}}</p> 
-                  <router-link :to="song.videoId">Link</router-link>
+                  <p><span><i class="fas fa-link"></i>Link:</span> <router-link :to="song.videoId">Click to see song</router-link> </p> 
                 </div>
                 <div class="buttons">
                   <button @click="play(song.videoId, index)"><i class="fas fa-play"></i></button>
@@ -50,22 +51,32 @@ export default {
             songs: [],
             playlist: [],
             currentPlaylistIndex: 0,
-            showPlaces: false,
-            selectedPlace: {}
+            showContent: false
+            
         }
     },
     computed:{
-      showProduct(){
-        const id = this.$route.params.id;
-        const song = this.songs.find((s) => s.videoId == id);
-        return song;
-      }
+      
     },
 
     methods:{
-    
+    showTopTen(){
+      axios
+            .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.keyword}`)
+            
+            .then(res => {
+              this.songs = res.data.content;
+              this.songs.splice(10,19);
+              console.log(this.songs)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+      
+    },
     play(id, index){
       // calling global variable
+      
       window.player.loadVideoById(id)
       this.currentPlaylistIndex = index
       window.player.playVideo()
@@ -82,17 +93,19 @@ export default {
     previous(){
       this.play(this.playlist[this.currentPlaylistIndex -1 ], this.currentPlaylistIndex -1)
       // if (this.currentPlaylistIndex[0]) {
-      //   this.play(this.playlist[this.currentPlaylistIndex[19]])
+      //    this.play(this.playlist[this.currentPlaylistIndex[19]])
       // }
     },
+
+    
     
     checkName(){
             axios
-            .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.keyword}`, {
-              params: {
-                search: this.keyword
-              }
-            })
+            .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.keyword}`)
+            //   //params: {
+            //     search: this.keyword
+            //   }
+            // })
             .then(res => {
               console.log(res.data.content)
               this.songs = res.data.content;
@@ -101,12 +114,7 @@ export default {
                 this.playlist.push(val.videoId);
                 console.log(this.playlist);
                 }
-                // this.songs.filter(item => {
-                //   return this.keyword
-                //   .toLowerCase()
-                //   .split(" ")
-                //   .every(v => item.name.toLowerCase().includes(v))
-                // })
+                this.showContent = true;
             })
             .catch(err => {
                 console.log(err)
@@ -114,11 +122,7 @@ export default {
         }
   },
   mounted(){
-          //  axios
-          //  .get(`https://yt-music-api.herokuapp.com/api/yt/artists/search+string`)
-          //  .then(res => {
-          //    console.log(res.data)
-          //  })
+          
   },
 
   watch:{
@@ -246,26 +250,51 @@ img{
     text-align:center;
 }
 
+a{
+  color:black;
+}
 
 
 
 
 @media screen and (max-width:500px) and (min-width: 400px){
   .form{
-    min-width: 100%;
+    min-width: 95%;
   }
 
   button{
     border-radius: 50%;
     margin-bottom: 2vw;
   }
+
+  .form2{
+    background-color: rgba(108, 109, 114);
+    margin-top: 70vh;
+    width:96%;
+    z-index: 1;
+  }
+
+  .form2>p{
+    color:white;
+  }
 }
 
 @media screen and (max-width: 1000px) and (min-width: 700px) {
   .form{
-    min-width: 100%;
+    min-width: 95%;
+    
   }
 
+  .form2{
+    background-color: rgba(108, 109, 114);
+    margin-top: 70vh;
+    width:96%;
+    z-index: 1;
+  }
+
+  .form2>p{
+    color:white;
+  }
   .buttons{
     margin-left: 10vw;
   }
