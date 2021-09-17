@@ -5,6 +5,7 @@ import Home from '/src/components/Home.vue'
 import Albums from '/src/components/Albums.vue'
 import Artists from '/src/components/Artists.vue'
 import SingleResult from '/src/components/SingleResult.vue'
+import SingleSong from '/src/components/SingleSong.vue'
 
 
 const routes = [
@@ -24,10 +25,15 @@ const routes = [
         component: Artists
     },
     {
-        path: '/:id',
+        path: '/artists/:id',
         name: 'SingleResult',
         component: SingleResult
     },
+    {
+        path: '/songs/:id',
+        name: 'SingleSong',
+        component: SingleSong
+    }
    
 ]
 const router = createRouter({

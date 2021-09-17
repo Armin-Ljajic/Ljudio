@@ -21,7 +21,7 @@
                   <p><span><i class="fas fa-user"></i>Artist:</span> {{song.artist.name}}</p> 
                   <img :src="song.thumbnails[1].url"> 
                   <p><span><i class="fab fa-itunes-note"></i>Song:</span> {{song.name}}</p>
-                  <p><span><i class="fas fa-link"></i>Link:</span> <router-link :to="song.videoId">Click to see song</router-link> </p> 
+                  <p><span><i class="fas fa-link"></i>Link:</span> <router-link :to="'/songs/' + song.videoId">Click to see song</router-link> </p> 
                 </div>
                 <div class="buttons">
                   <button @click="play(song.videoId, index)"><i class="fas fa-play"></i></button>
@@ -287,7 +287,7 @@ a{
 
   .form2{
     background-color: rgba(108, 109, 114);
-    margin-top: 70vh;
+    margin-top: 65vh;
     width:96%;
     z-index: 1;
   }

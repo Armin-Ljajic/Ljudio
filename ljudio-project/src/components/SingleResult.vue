@@ -129,9 +129,6 @@ export default {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.singleSongUL>li>img{
-
-}
 
 .singleArtistUL{
     padding: 0;
@@ -178,7 +175,6 @@ button:hover{
 }
 
 img{
-    width:10vw;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 </style>
