@@ -5,11 +5,12 @@
             <section>
                 <input type="text" placeholder="Search albums.." v-model="keyword">
                 <button @click.prevent="checkName"><i class="fas fa-search"></i></button>
-                <p class="searchParam">Search artists to see their albums and singles</p>
+                <p class="searchParam">Search albums and artists to see albums</p>
                 <ul>
-                    <li v-for="album in albums" :key="album.name">
+                    <li v-for="album in albums" :key="album.browseId">
                         <p><i class="fas fa-record-vinyl"></i>{{album.name}}</p>
-                        <p><img :src="album.thumbnails[1].url"> {{album.type}}</p>
+                        <p>Artist: {{album.artist}}</p>
+                        <!-- <p><img :src="album.thumbnails[1].url"> {{album.type}}</p> -->
                     </li>
                 </ul>
             </section>
@@ -41,14 +42,15 @@ export default {
 
     checkName(){
             axios
-            .get(`https://yt-music-api.herokuapp.com/api/yt/albums/${this.keyword}`, {
+            .get(`https://yt-music-api.herokuapp.com/api/yt/search/${this.keyword}`, {
               params: {
                     search: this.keyword
               }
             })
             .then(res => {
               console.log(res.data.content)
-              this.albums = res.data.content;
+              this.albums = res.data.content.filter(a => a.type ==="album")
+              console.log(this.albums);
             })
             .catch(err => {
                 console.log(err)

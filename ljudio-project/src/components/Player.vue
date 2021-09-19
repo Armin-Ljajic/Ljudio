@@ -17,7 +17,7 @@
         <ul>
             <li v-for="(song, index) in songs" :key="index">
                 <div> 
-                  <p><span><i class="fas fa-record-vinyl"></i>Album:</span> {{song.album.name}}</p> 
+                  <!-- <p><span><i class="fas fa-record-vinyl"></i>Album:</span> {{song.album.name}}</p>  -->
                   <p><span><i class="fas fa-user"></i>Artist:</span> {{song.artist.name}}</p> 
                   <img :src="song.thumbnails[1].url"> 
                   <p><span><i class="fab fa-itunes-note"></i>Song:</span> {{song.name}}</p>
@@ -275,7 +275,7 @@ a{
 
   .form2{
     background-color: rgba(108, 109, 114);
-    margin-top: 70vh;
+    margin-top: 68vh;
     width:96%;
     z-index: 1;
   }
