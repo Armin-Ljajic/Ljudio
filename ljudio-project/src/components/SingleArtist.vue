@@ -6,9 +6,19 @@
                 <li v-for="(singleArtist, index) in singleArtists" :key="index">
                     <h2><i class="fas fa-user"></i> {{singleArtist.name}}</h2>
                     <img :src="singleArtist.thumbnails[1].url">
+                    <p class="description">{{text}}</p>
                 </li>
             </ul>
         </div>
+
+        <!-- <div class="form">
+            <ul>
+                <li v-for="(song, index) in playlist " :key="index">
+                    <p>{{song.videoId}}</p>
+
+                </li>
+            </ul>
+        </div> -->
         <Footer/>
     </body>
 </template>
@@ -28,6 +38,7 @@ export default {
             return{
                 singleSongs: [],
                 singleArtists: [],
+                playlist: [],
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sapien odio, sodales sed volutpat sodales, aliquet vel risus. Sed tempus tempus metus. Integer feugiat aliquam nisl, et ultrices diam ornare sed. Nullam quis magna vitae ex euismod laoreet non id lacus. Fusce eget arcu sed felis congue molestie. Vivamus et ante lectus. "
             }
         },
@@ -47,15 +58,12 @@ export default {
 
     mounted(){  
         axios
-            .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.$route.params.id}`, {
-                params: {
-                    search: this.$route.params.id
-                }
+            .get(`https://yt-music-api.herokuapp.com/api/yt/playlists/${this.$route.params.id}`, {
                 
             })
             .then(res => {
               console.log(res.data.content)
-              this.singleSongs = res.data.content;
+              this.playlist = res.data.content;
             })
             .catch(err => {
                 console.log(err)
@@ -83,7 +91,7 @@ export default {
 .form{
   background-color: rgb(187, 166, 138, 0.5);
   /* min-height:40vh; */
-  min-width:30%;
+  min-width: 50%;   
   margin: auto;
   margin-top: 15vh;
   padding-bottom: 2vw;
@@ -140,5 +148,9 @@ button:hover{
 
 img{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.description{
+    margin-left: 2vw;
 }
 </style>

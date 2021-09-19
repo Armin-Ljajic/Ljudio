@@ -2,7 +2,7 @@
   <div>
       <div class="form2">
             <input type="text" placeholder="Search.." v-model="keyword">
-            <button @click.prevent="checkName"><i class="fas fa-search"></i></button>
+            <button @click.prevent="searchSongs"><i class="fas fa-search"></i></button>
             
               <div class="buttons2">
                 <button @click="previous"><i class="fas fa-backward"></i></button>
@@ -56,24 +56,12 @@ export default {
         }
     },
     computed:{
-      
+     
     },
 
     methods:{
-    showTopTen(){
-      axios
-            .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.keyword}`)
-            
-            .then(res => {
-              this.songs = res.data.content;
-              this.songs.splice(10,19);
-              console.log(this.songs)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-      
-    },
+
+   
     play(id, index){
       // calling global variable
       
@@ -97,9 +85,27 @@ export default {
       // }
     },
 
+     showTopTen(){
+      axios
+            .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.keyword}`)
+            
+            .then(res => {
+              this.songs = res.data.content;
+              this.songs.splice(10,19);
+              console.log(this.songs)
+              for(const val of this.songs){
+                this.playlist.push(val.videoId);
+                this.playlist.splice(10,19)
+                console.log(this.playlist);
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+      
+    },
     
-    
-    checkName(){
+    searchSongs(){
             axios
             .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.keyword}`)
             //   //params: {
@@ -134,7 +140,7 @@ export default {
     
   },
   created(){
-    this.debounceName = debounce(this.checkName, 500)
+    this.debounceName = debounce(this.searchSongs, 500)
   }
 }
 </script>

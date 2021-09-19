@@ -8,7 +8,7 @@
                     <p><i class="fab fa-itunes-note"></i> <span>Song: </span>{{singleSong.name}}</p>
                     <img :src="singleSong.thumbnails[1].url"/>
                     <div class="buttons">
-                        <button @click="play(singleSong.videoId, index)"><i class="fas fa-play"></i></button>
+                        <button @click="play(singleSong.videoId)"><i class="fas fa-play"></i></button>
                         <button @click="pause"><i class="fas fa-pause"></i></button>
                     </div>
                     <!-- <p> <span>Description: </span>{{text}}</p> -->
@@ -41,7 +41,18 @@ export default {
 
         }
     },
-
+    methods:{
+        
+    play(id){
+      // calling global variable
+      
+      window.player.loadVideoById(id)
+      window.player.playVideo()
+    },
+    pause(){
+      window.player.pauseVideo()
+    },
+    },
     mounted() {
             axios
             .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.$route.params.id}`, {
