@@ -1,12 +1,12 @@
 <template>
-    <section class="nav">
+    <div class="nav">
         <nav>
             <h1>LJUDIO</h1>
              <router-link to="/">Home</router-link> |
              <router-link to="/albums">Albums</router-link> |
              <router-link to="/artists">Artists</router-link>
         </nav>
-    </section>
+    </div>
 </template>
 <script>
 export default {

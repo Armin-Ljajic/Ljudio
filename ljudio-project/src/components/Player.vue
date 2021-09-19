@@ -185,6 +185,7 @@ li{
   margin-bottom: 2vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
+  background-color: rgba(200, 180, 154, 0.5);
 }
 
 
@@ -269,7 +270,6 @@ a{
   }
 
   button{
-    border-radius: 50%;
     margin-bottom: 2vw;
   }
 
@@ -293,7 +293,7 @@ a{
 
   .form2{
     background-color: rgba(108, 109, 114);
-    margin-top: 65vh;
+    margin-top: 66vh;
     width:96%;
     z-index: 1;
   }

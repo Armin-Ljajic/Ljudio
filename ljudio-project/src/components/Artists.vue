@@ -4,7 +4,7 @@
         <div class="artists">
             <section>
                 <input type="text" placeholder="Search artists.." v-model="keyword">
-                <button @click.prevent="checkName"><i class="fas fa-search"></i></button>
+                <button @click.prevent="searchArtists"><i class="fas fa-search"></i></button>
                 <p class="searchParam">Search artists to see the artist name and whom the artist features</p>
                 <ul>
                     <li v-for="artist in artists" :key="artist.name">
@@ -39,7 +39,7 @@ export default {
     },
 
     methods:{
-    checkName(){
+    searchArists(){
             axios
             .get(`https://yt-music-api.herokuapp.com/api/yt/artists/:${this.keyword}`, {
               params: {
@@ -87,11 +87,14 @@ li{
     margin-bottom: 2vw;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 10px;
+    background-color: rgba(200, 180, 154, 0.5);
 }
 ul{
     padding:0;
     padding-top: 2vw;
+    
 }
+
 
 input{
   display:block;
