@@ -51,16 +51,31 @@ export default {
             songs: [],
             playlist: [],
             currentPlaylistIndex: 0,
-            showContent: false
+            showContent: this.$store.state.properties.showContent
             
         }
     },
     computed:{
-      
+      // keyword: {
+      //   get(){
+      //     return this.$store.state.properties.keyword
+      //   },
+      //   set(value){
+      //     this.$store.commit('updateInput', value)
+      //   }
+      // },
+      // songs(){
+      //   return this.$store.state.arrayOfLists.songs
+      // },
+      // showContent(){
+      //   return this.$store.state.properties.showContent
+      // }
     },
 
     methods:{
-
+      searchSongs(){
+        this.$store.dispatch('searchSongs')
+      },
    
     play(id, index){
       // calling global variable
@@ -117,10 +132,7 @@ export default {
     searchSongs(){
             axios
             .get(`https://yt-music-api.herokuapp.com/api/yt/songs/:${this.keyword}`)
-            //   //params: {
-            //     search: this.keyword
-            //   }
-            // })
+            
             .then(res => {
               console.log(res.data.content)
               this.songs = res.data.content;
@@ -229,8 +241,7 @@ button:hover{
   display:flex;
 
 }
-.buttons2>button{
-}
+
 div>span{
   font-weight: bold;
 }
