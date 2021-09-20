@@ -11,7 +11,6 @@
                         <button @click="play(singleSong.videoId)"><i class="fas fa-play"></i></button>
                         <button @click="pause"><i class="fas fa-pause"></i></button>
                     </div>
-                    <!-- <p> <span>Description: </span>{{text}}</p> -->
                 </li>
             </ul>
         </div> 

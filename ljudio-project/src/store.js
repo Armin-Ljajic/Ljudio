@@ -3,14 +3,15 @@ import axios from 'axios'
 
 const store = createStore({
    state:{
-
+      
+   },
+   getters:{
       
    },
    mutations:{
        
    },
    actions:{
-      
      
    }
 })

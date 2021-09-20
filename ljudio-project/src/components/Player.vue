@@ -56,7 +56,7 @@ export default {
         }
     },
     computed:{
-     
+      
     },
 
     methods:{
@@ -65,10 +65,19 @@ export default {
     play(id, index){
       // calling global variable
       
-      window.player.loadVideoById(id)
+      window.player.loadVideoById({
+        'videoId': id,
+        })
       this.currentPlaylistIndex = index
       window.player.playVideo()
     },
+
+    cueVideo(id){
+      window.player.cueVideoById({
+        'videoId': id
+      })
+    },
+
     pause(){
       window.player.pauseVideo()
     },
@@ -80,8 +89,8 @@ export default {
     },
     previous(){
       this.play(this.playlist[this.currentPlaylistIndex -1 ], this.currentPlaylistIndex -1)
-      // if (this.currentPlaylistIndex[0]) {
-      //    this.play(this.playlist[this.currentPlaylistIndex[19]])
+      // if (this.currentPlaylistIndex === 0) {
+      //    this.play(this.playlist[this.currentPlaylistIndex +19], this.playlist[this.currentPlaylistIndex + 19])
       // }
     },
 
@@ -152,7 +161,7 @@ export default {
   /* min-height:40vh; */
   width:50%;
   margin: auto;
-  margin-top: 15vh;
+  margin-top: 10vh;
   padding-bottom: 2vw;
   padding-top: 2vw;
   padding-right: 40px;
@@ -224,7 +233,6 @@ button:hover{
 }
 div>span{
   font-weight: bold;
-  
 }
 
 div>p{
@@ -275,7 +283,7 @@ a{
 
   .form2{
     background-color: rgba(108, 109, 114);
-    margin-top: 68vh;
+    margin-top: 62vh;
     width:96%;
     z-index: 1;
   }
@@ -285,7 +293,7 @@ a{
   }
 }
 
-@media screen and (max-width: 1000px) and (min-width: 700px) {
+@media screen and (max-width: 1200px) and (min-width: 700px) {
   .form{
     min-width: 95%;
     
@@ -293,7 +301,7 @@ a{
 
   .form2{
     background-color: rgba(108, 109, 114);
-    margin-top: 66vh;
+    margin-top: 62vh;
     width:96%;
     z-index: 1;
   }

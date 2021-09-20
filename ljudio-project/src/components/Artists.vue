@@ -39,7 +39,7 @@ export default {
     },
 
     methods:{
-    searchArists(){
+    searchArtists(){
             axios
             .get(`https://yt-music-api.herokuapp.com/api/yt/artists/:${this.keyword}`, {
               params: {
@@ -65,7 +65,7 @@ export default {
     min-height:40vh;
     width:50%;
     margin: auto;
-    margin-top: 15vh;
+    margin-top: 10vh;
     padding-bottom: 2vw;
     padding-top: 2vw;
     padding-right: 40px;
