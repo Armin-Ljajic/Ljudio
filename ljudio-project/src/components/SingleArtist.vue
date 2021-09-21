@@ -1,24 +1,28 @@
 <template>
     <body>
         <Header/>
-        <div class="form">
-            <ul class="singleArtistUL">
-                <li v-for="(singleArtist, index) in singleArtists" :key="index">
-                    <h2><i class="fas fa-user"></i> {{singleArtist.name}}</h2>
-                    <img :src="singleArtist.thumbnails[1].url">
-                    <p class="description">{{text}}</p>
-                </li>
-            </ul>
+        <div>
+            <div class="form">
+                <ul class="singleArtistUL">
+                    <li v-for="(singleArtist, index) in singleArtists" :key="index">
+                        <h2><i class="fas fa-user"></i> {{singleArtist.name}}</h2>
+                        <img :src="singleArtist.thumbnails[1].url">
+                        <p class="description">{{singleArtist.description}}</p>
+                        <button @click="copyUrl">Copy to link clipboard</button>
+                    </li>
+                </ul>
+                <ul class="songsUL">
+                    <li v-for="(song, index) in songs" :key="index">
+                        <h1>Famous songs</h1>
+                        <p>{{song[0].name}}</p>
+                        <p>{{song[1].name}}</p>
+                        <p>{{song[2].name}}</p>
+                        <p>{{song[3].name}}</p>
+                        <p>{{song[4].name}}</p>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-        <!-- <div class="form">
-            <ul>
-                <li v-for="(song, index) in playlist " :key="index">
-                    <p>{{song.videoId}}</p>
-
-                </li>
-            </ul>
-        </div> -->
         <Footer/>
     </body>
 </template>
@@ -36,54 +40,46 @@ export default {
         },
         data(){
             return{
-                singleSongs: [],
                 singleArtists: [],
-                playlist: [],
+                songs: [],
                 text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sapien odio, sodales sed volutpat sodales, aliquet vel risus. Sed tempus tempus metus. Integer feugiat aliquam nisl, et ultrices diam ornare sed. Nullam quis magna vitae ex euismod laoreet non id lacus. Fusce eget arcu sed felis congue molestie. Vivamus et ante lectus. "
             }
         },
         methods: {
-            play(id, index){
-        // calling global variable
-        window.player.loadVideoById(id)
-        this.currentPlaylistIndex = index
-        window.player.playVideo()
-        },
-        pause(){
-        window.player.pauseVideo()
-        
-        }
+            copyUrl(){
+                var dummy = document.createElement('input'),
+                text = window.location.href;
 
-    },
+                document.body.appendChild(dummy);
+                dummy.value = text;
+                dummy.select();
+                document.execCommand('copy');
+                document.body.removeChild(dummy);
+            }
+        },
 
     mounted(){  
-        axios
-            .get(`https://yt-music-api.herokuapp.com/api/yt/playlists/${this.$route.params.id}`, {
-                
-            })
-            .then(res => {
-              console.log(res.data.content)
-              this.playlist = res.data.content;
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        
 
         axios
-            .get(`https://yt-music-api.herokuapp.com/api/yt/artists/:${this.$route.params.id}`, {
-                params: {
-                    search: this.$route.params.id
-                }
+            .get(`https://yt-music-api.herokuapp.com/api/yt/artist/${this.$route.params.id}`, {
                 
             })
             .then(res => {
-              console.log(res.data.content)
-              this.singleArtists = res.data.content;
+              console.log(res.data)
+              this.singleArtists.push(res.data);
+              this.songs.push(res.data.products.songs.content)
+              console.log(this.songs)
             })
             .catch(err => {
                 console.log(err)
             })
-    }         
+        
+        
+    },
+    created(){
+        
+    }      
 }
 </script>
 
@@ -93,7 +89,7 @@ export default {
   /* min-height:40vh; */
   min-width: 50%;   
   margin: auto;
-  margin-top: 15vh;
+  margin-top: 5vh;
   padding-bottom: 2vw;
   padding-top: 2vw;
   padding-right: 40px;
@@ -109,7 +105,8 @@ export default {
 .singleArtistUL>li{
     list-style: none;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
     padding:5vw;
 }
 
@@ -117,17 +114,40 @@ export default {
     margin-right: 2vw;
     margin-top: 3vw;
     font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.songsUL{
+    padding:0;
+}
+
+.songsUL>li{
+    list-style: none;
+    padding:5vw;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.songsUL>li>h1,
+.songsUL>li>p{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.description{
+    font-family: 'Courier New', Courier, monospace;
 }
 
 button{
-  display:flex;
-  margin: 0 auto;
+  margin:0 auto;
   width: 60%;
   background-color: rgb(158, 146, 130);
   color:white;
   border: 1px solid black;
   border-radius: 5px ;
   font-family: 'Courier New', Courier, monospace;
+  
+  
 }
 
 .buttons{
@@ -148,9 +168,45 @@ button:hover{
 
 img{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width:80vw;
+    margin-bottom: 2vw;
 }
 
 .description{
     margin-left: 2vw;
+}
+
+@media screen and (max-width:600px) and (min-width: 500px){
+    .form{
+        width:95%;
+        margin-top: 10vw;
+    }
+    .singleArtistUL>li{
+        display:flex;
+        flex-direction: column;
+    }
+    
+    img{
+        height:50vw;
+    }
+
+
+    h2{
+        text-align: center;
+    }
+    
+
+@media screen and (max-width: 1200px) and (min-width: 700px) {
+    .form{
+        width:80%;
+    }
+
+    .singleArtistUL>li{
+        display:flex;
+        flex-direction: column;
+    }
+
+}
+
 }
 </style>

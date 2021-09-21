@@ -51,7 +51,8 @@ export default {
             songs: [],
             playlist: [],
             currentPlaylistIndex: 0,
-            showContent: this.$store.state.properties.showContent
+            showContent: false
+
             
         }
     },

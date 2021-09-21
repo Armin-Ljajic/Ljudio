@@ -65,7 +65,7 @@ a{
   
 }
 
-@media screen and (max-width: 1000px) and (min-width: 700px) {
+@media screen and (max-width: 1200px) and (min-width: 700px) {
   .icons{
       text-align:center;
       position:relative;

@@ -5,9 +5,9 @@
             <section>
                 <input type="text" placeholder="Search artists.." v-model="keyword">
                 <button @click.prevent="searchArtists"><i class="fas fa-search"></i></button>
-                <p class="searchParam">Search artists to see the artist name and whom the artist features</p>
+                <p class="searchParam">Search artists to see the artist name and who the artist features</p>
                 <ul>
-                    <li v-for="artist in artists" :key="artist.name">
+                    <li v-for="(artist, index) in artists" :key="index">
                         <p><i class="fas fa-user"></i>{{artist.name}}</p>
                         <img :src="artist.thumbnails[1].url">
                         <p><i class="fas fa-link"></i> <router-link :to="'/artists/'+ artist.browseId">Click to see artist</router-link></p>
@@ -48,7 +48,8 @@ export default {
             })
             .then(res => {
               console.log(res.data.content)
-              this.artists = res.data.content;
+              this.artists = res.data.content
+              console.log(this.artists)
             })
             .catch(err => {
                 console.log(err)
@@ -134,14 +135,14 @@ img{
 }
 @media screen and (max-width:500px) and (min-width: 400px){
   .artists{
-    min-width: 100%;
+    min-width: 95%;
   }
   
 }
 
 @media screen and (max-width: 1000px) and (min-width: 700px) {
   .artists{
-    min-width: 100%;
+    min-width: 95%;
   }
   
 }
