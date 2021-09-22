@@ -40,8 +40,10 @@ import axios from 'axios';
 import jquery from 'jquery';
 window.$ = jquery;
 import {debounce} from 'lodash';
+import vue from '@vitejs/plugin-vue'
 
 export default {
+  plugins: [vue()],
   components:{
     axios,
   },
@@ -68,15 +70,12 @@ export default {
       // songs(){
       //   return this.$store.state.arrayOfLists.songs
       // },
-      // showContent(){
-      //   return this.$store.state.properties.showContent
-      // }
     },
 
     methods:{
-      searchSongs(){
-        this.$store.dispatch('searchSongs')
-      },
+      // searchSongs(){
+      //   this.$store.dispatch('searchSongs')
+      // },
    
     play(id, index){
       // calling global variable
@@ -88,10 +87,7 @@ export default {
       window.player.playVideo()
     },
 
-    cueVideo(id){
-      window.player.cueVideoById({
-        'videoId': id
-      })
+    
     },
 
     pause(){
@@ -148,23 +144,21 @@ export default {
                 console.log(err)
             })
         }
-  },
-  mounted(){
-          
-  },
+    
+    }
+  
 
   watch:{
-    keyword(){
+    keyword();{
       if (!this.keyword) return;
       this.debounceName();
     }
-
-    
-  },
-  created(){
+  }
+  created();{
     this.debounceName = debounce(this.searchSongs, 500)
   }
 }
+
 </script>
 
 <style scoped>
